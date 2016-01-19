@@ -42,8 +42,8 @@ if(empty($servers[$server]['ip'])) {
 	$port = $servers[$server]['port'];
 }
 
-$ping_url = "http://api.minetools.eu/ping/" . $SERVER_IP . "/" . $SERVER_PORT;
-$query_url = "http://api.minetools.eu/query/" . $ip . "/" . $port;
+$ping_url = "https://api.minetools.eu/ping/" . $SERVER_IP . "/" . $SERVER_PORT;
+$query_url = "https://api.minetools.eu/query/" . $ip . "/" . $port;
 
 $ping = json_decode(file_get_contents($ping_url), true);
 
@@ -64,9 +64,9 @@ if(empty($ping['error'])) {
         <meta charset="utf-8">
         <title><?php echo htmlspecialchars($TITLE); ?></title>
         <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">
-    	<link href='http://fonts.googleapis.com/css?family=Lato:300,400' rel='stylesheet' type='text/css'>
+    	<link href='//fonts.googleapis.com/css?family=Lato:300,400' rel='stylesheet' type='text/css'>
     	<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
-    	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.js"></script>
+    	<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.js"></script>
     	<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.js"></script>
     	<script src="bootstrap-notify.js"></script>
     	<script language="javascript">
@@ -99,7 +99,7 @@ $(document).ready(function () {
 	function display_notify(name, event, color) {
 		$.notify({
 			// options
-			icon: 'http://cravatar.eu/helmhead/' + name + '/64',
+			icon: '//cravatar.eu/helmhead/' + name + '/64',
 			message: name + ' ' + event 
 		},{
 			// settings
@@ -131,7 +131,7 @@ $(document).ready(function () {
 					$('#players').append(
 						'<a data-placement="top" rel="tooltip" style="display: inline-block;" title="' + all[player] + '">'
 						+
-						'<img id="' + all[player] + '" src="http://cravatar.eu/avatar/' + all[player] + '/50" style="margin-bottom: 5px; margin-right: 5px; border-radius: 3px; ">'
+						'<img id="' + all[player] + '" src="//cravatar.eu/avatar/' + all[player] + '/50" style="margin-bottom: 5px; margin-right: 5px; border-radius: 3px; ">'
 						+
 						'</a>'
 					);
