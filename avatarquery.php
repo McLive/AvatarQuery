@@ -132,7 +132,7 @@ if (empty($ping['error'])) {
             function display_notify(name, event, color) {
                 $.notify({
                     // options
-                    icon: '//cravatar.eu/helmhead/' + name + '/64',
+                    icon: '//www.minecraft-skin-viewer.net/3d.php?layers=true&aa=true&a=340&w=20&wt=10&abg=330&abd=40&ajg=340&ajd=20&ratio=5&format=png&login=' + name + '&headOnly=true&displayHairs=true&randomness=752',
                     message: name + ' ' + event
                 }, {
                     // settings
@@ -200,7 +200,7 @@ if (empty($ping['error'])) {
                             $('#players').append(
                                 '<a data-placement="top" rel="tooltip" style="display: inline-block;" title="' + all[player] + '">'
                                 +
-                                '<img id="' + all[player] + '" src="//cravatar.eu/avatar/' + all[player] + '/50" style="margin-bottom: 5px; margin-right: 5px; border-radius: 3px; ">'
+                                '<img id="' + all[player] + '" src="//www.minecraft-skin-viewer.net/3d.php?layers=true&aa=true&a=340&w=20&wt=10&abg=330&abd=40&ajg=340&ajd=20&ratio=5&format=png&login=' + all[player] + '&headOnly=true&displayHairs=true&randomness=752" style="margin-bottom: 5px; margin-right: 5px; border-radius: 3px; ">'
                                 +
                                 '</a>'
                             );
