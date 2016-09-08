@@ -116,7 +116,7 @@ if (empty($ping['error'])) {
 
             var servers = <?php echo json_encode($servers); ?>;
 
-            players = [];
+            var players = [];
 
 
             refresh();
@@ -176,11 +176,11 @@ if (empty($ping['error'])) {
                         var max = data['players']['max'];
                         var percent = online / max * 100;
                     }
-                    updateProgess(online, max, percent, srv, status);
+                    updateProgess(online, percent, srv, status);
                 });
             }
 
-            function updateProgess(online, max, percent, srv, status) {
+            function updateProgess(online, percent, srv, status) {
                 $('.progress-bar#' + srv).css('width', percent + '%').attr('aria-valuenow', percent).text(online);
 
                 if (status) {
