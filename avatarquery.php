@@ -3,10 +3,10 @@
 /**
  * Turn on for debugging. Will print possible errors on your page.
  */
-ini_set("display_errors", 1);
-ini_set("track_errors", 1);
-ini_set("html_errors", 1);
-error_reporting(E_ALL);
+ini_set("display_errors", 0);
+ini_set("track_errors", 0);
+ini_set("html_errors", 0);
+error_reporting(E_ERROR);  # E_ALL || E_ERROR
 
 
 /**
