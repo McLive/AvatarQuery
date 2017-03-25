@@ -11,21 +11,28 @@ error_reporting(E_ERROR);  # E_ALL || E_ERROR
 /**
  * Servers to query. Will show avatars of connected players on the right side.
  * Set status 'false' if you don't want playercounts on the left side.
+ *
+ * port is the port to ping for basic information like online-status and online-players.
+ * query_port is the port to query for advanced information like connected players etc.
+ * query_port can be the same as port (lookup server.properties).
  */
 $servers = array(
     'Skyblock' => array(
         'ip' => 'sky.freecraft.eu',
         'port' => '25555',
+        'query_port' => '25555',
         'status' => true
     ),
     'Survival' => array(
         'ip' => 's.freecraft.eu',
         'port' => '25566',
+        'query_port' => '25566',
         'status' => true
     ),
     'Creative' => array(
         'ip' => 's.freecraft.eu',
         'port' => '25559',
+        'query_port' => '25559',
         'status' => true
     )
 );

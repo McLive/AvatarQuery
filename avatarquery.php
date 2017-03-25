@@ -7,15 +7,23 @@ if (empty($_GET['server'])) {
     $server = $_GET['server'];
 }
 
+// use first server in list if an invalid server is provided with GET ?server
 if (empty($servers[$server]['ip'])) {
     $ip = reset($servers)['ip'];
     $port = reset($servers)['port'];
+    $query_port = reset($servers)['query_port'];
 } else {
     $ip = $servers[$server]['ip'];
     $port = $servers[$server]['port'];
+    $query_port = $servers[$server]['query_port'];
 }
 
-$query_url = "https://api.minetools.eu/query/" . $ip . "/" . $port;
+// use the ping port if no query port is provided in config.php
+if(!$query_port) {
+    $query_port = $port;
+}
+
+$query_url = "https://api.minetools.eu/query/" . $ip . "/" . $query_port;
 
 ?>
 <!DOCTYPE html>
@@ -82,7 +90,8 @@ $query_url = "https://api.minetools.eu/query/" . $ip . "/" . $port;
                 <?php if ($SHOW_FAVICON) { ?>
                     <tr>
                         <td><b>Favicon</b></td>
-                        <td><img data-bind="attr: { src: bungee.favicon()}" src="" width="64px" height="64px" style="float:left;"/></td>
+                        <td><img data-bind="attr: { src: bungee.favicon()}" src="" width="64px" height="64px"
+                                 style="float:left;"/></td>
                     </tr>
                 <?php } ?>
                 </tbody>
@@ -163,7 +172,7 @@ $query_url = "https://api.minetools.eu/query/" . $ip . "/" . $port;
         });
 
         self.ping = function () {
-            if(self.status == false) {
+            if (self.status == false) {
                 return true;
             }
             $.get(self.pingUrl(), function (data) {
@@ -211,7 +220,7 @@ $query_url = "https://api.minetools.eu/query/" . $ip . "/" . $port;
         };
 
         self.updateServers = function () {
-            self.servers().forEach(function(item){
+            self.servers().forEach(function (item) {
                 item.ping();
             });
             self.bungee.ping();
@@ -236,15 +245,15 @@ $query_url = "https://api.minetools.eu/query/" . $ip . "/" . $port;
         this.addPlayer = function (player, notify) {
             var newPlayer = new Player(player.name);
 
-            var match = ko.utils.arrayFirst(this.playersOnline(), function(item) {
+            var match = ko.utils.arrayFirst(this.playersOnline(), function (item) {
                 return newPlayer.name() === item.name();
             });
 
             // Player does not exist in the observableArray so we'll add him
-            if(!match) {
+            if (!match) {
                 this.playersOnline.push(new Player(player.name));
                 console.log("[KO] Added " + player.name);
-                if(notify) {
+                if (notify) {
                     display_notify(player.name, "joined", "success")
                 }
             }
@@ -267,12 +276,12 @@ $query_url = "https://api.minetools.eu/query/" . $ip . "/" . $port;
          */
         this.removePlayers = function (players, notify) {
             var self = this;
-            this.playersOnline().forEach(function(item){
+            this.playersOnline().forEach(function (item) {
                 if ($.inArray(item.name(), players) == "-1") {
                     self.removePlayer(item);
                     console.log("[KO] Removed " + item.name());
 
-                    if(notify) {
+                    if (notify) {
                         display_notify(ko.unwrap(item.name), "left", "danger");
                     }
                 }
@@ -286,8 +295,8 @@ $query_url = "https://api.minetools.eu/query/" . $ip . "/" . $port;
     };
 
     ko.bindingHandlers.stopBinding = {
-        init: function() {
-            return { controlsDescendantBindings: true };
+        init: function () {
+            return {controlsDescendantBindings: true};
         }
     };
 
@@ -318,7 +327,7 @@ $query_url = "https://api.minetools.eu/query/" . $ip . "/" . $port;
         var notify = !firstRun;
         var query_url = "<?php echo $query_url; ?>";
         $.get(query_url, function (data) {
-            if(data['status'] == "OK") {
+            if (data['status'] == "OK") {
                 players = data['Playerlist'];
 
                 playermodel.addNewPlayers(players, notify);
